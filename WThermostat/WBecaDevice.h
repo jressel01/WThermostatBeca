@@ -32,9 +32,9 @@ const static char HTTP_CONFIG_SCHTAB_FOOT[]         PROGMEM = R"=====(
 // see https://www.home-assistant.io/docs/mqtt/discovery/ 
 // and https://www.home-assistant.io/integrations/climate.mqtt/
 // LWT = Last Will & Testament
+// "name":"%s",
 const static char MQTT_HASS_AUTODISCOVERY_CLIMATE[]         PROGMEM = R"=====(
 {
-"name":"%s",
 "unique_id": "%s",
 "dev":{"ids":["%s"],"name":"%s","mdl":"%s","sw":"%s","mf":"WThermostatBeca"},
 "~": "%s",
@@ -46,9 +46,6 @@ const static char MQTT_HASS_AUTODISCOVERY_CLIMATE[]         PROGMEM = R"=====(
 "mode_cmd_t":"~/cmnd/things/thermostat/properties/mode",
 "mode_stat_t":"~/stat/things/thermostat/properties",
 "mode_stat_tpl":"{{value_json.mode}}",
-"away_mode_cmd_t":"~/cmnd/things/thermostat/properties/ecoMode",
-"away_mode_stat_t":"~/stat/things/thermostat/properties",
-"away_mode_stat_tpl":"{{value_json.ecoMode}}",
 "temp_cmd_t":"~/cmnd/things/thermostat/properties/targetTemperature",
 "temp_stat_t":"~/stat/things/thermostat/properties",
 "temp_stat_tpl":"{{value_json.targetTemperature}}",
@@ -98,7 +95,7 @@ const static char MQTT_HASS_AUTODISCOVERY_AIRCO[]         PROGMEM = R"=====(
 )=====";
 const static char MQTT_HASS_AUTODISCOVERY_SENSOR[]         PROGMEM = R"=====(
 {
-"name":"%s Temperature",
+"name":"Temperature",
 "unique_id":"%s",
 "device_class":"temperature",
 "dev":{"ids":["%s"]},
@@ -110,7 +107,7 @@ const static char MQTT_HASS_AUTODISCOVERY_SENSOR[]         PROGMEM = R"=====(
 )=====";
 const static char MQTT_HASS_AUTODISCOVERY_SENSORFLOOR[]         PROGMEM = R"=====(
 {
-"name":"%s Temperature Floor",
+"name":"Temperature Floor",
 "unique_id":"%s",
 "device_class":"temperature",
 "dev":{"ids":["%s"]},
@@ -122,7 +119,7 @@ const static char MQTT_HASS_AUTODISCOVERY_SENSORFLOOR[]         PROGMEM = R"====
 )=====";
 const static char MQTT_HASS_AUTODISCOVERY_SENSORRSSI[]         PROGMEM = R"=====(
 {
-"name":"%s WiFi RSSI",
+"name":"WiFi RSSI",
 "unique_id":"%s",
 "device_class":"signal_strength",
 "dev":{"ids":["%s"]},
@@ -1305,7 +1302,7 @@ public:
 		if (!removeDiscovery){
 			if (getThermostatModel() == MODEL_BHT_002_GBLW ){
 				response->printf_P(MQTT_HASS_AUTODISCOVERY_CLIMATE,
-					network->getIdx(),
+					// network->getIdx(),
 					unique_id.c_str(),
 					network->getMacAddress().c_str(),
 					network->getIdx(),
@@ -1337,7 +1334,7 @@ public:
 		topic.concat(F("/config"));
 		if (!removeDiscovery){
 				response->printf_P(MQTT_HASS_AUTODISCOVERY_SENSOR,
-				network->getIdx(),
+				//network->getIdx(),
 				unique_id.c_str(),
 				network->getMacAddress().c_str(),
 				network->getMqttTopic()
@@ -1354,7 +1351,7 @@ public:
 			topic.concat(F("/config"));
 			if (!removeDiscovery){
 				response->printf_P(MQTT_HASS_AUTODISCOVERY_SENSORFLOOR,
-					network->getIdx(),
+					//network->getIdx(),
 					unique_id.c_str(),
 					network->getMacAddress().c_str(),
 					network->getMqttTopic()
@@ -1371,7 +1368,7 @@ public:
 		topic.concat(F("/config"));
 		if (!removeDiscovery){
 			response->printf_P(MQTT_HASS_AUTODISCOVERY_SENSORRSSI,
-				network->getIdx(),
+				//network->getIdx(),
 				unique_id.c_str(),
 				network->getMacAddress().c_str(),
 				network->getMqttTopic()
