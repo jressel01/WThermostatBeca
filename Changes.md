@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.20.beta1-jrs
+
+* Change WIFI Password from 32 to 64
+
 ## Version 1.19-fas
 
 * Fix/Enhancement #54: If enabled, all single Properties are sent out every notification interval, not only if changed
